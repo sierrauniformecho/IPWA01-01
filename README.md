@@ -1,9 +1,7 @@
 # IPWA01-01: Gender-Automat
 
 ## Aufgabenstellung:
-Du bist für einen großen Fachverlag für technische Dokumentationen als Web-Entwickler:in tätig. Die technischen Redakteurinnen und Redakteure schreiben häufig Texte wie Anleitungen, die über ein Content-ManagementSystem (CMS) verfasst 
-und der Kundschaft bereitgestellt werden. Weil die Redakteurinnen und Redakteure aber stets unter hohem Zeitdruck stehen und keinerlei Erfahrung mit der Verwendung einer gendersensiblen Sprache
-haben, wird diese Tätigkeit an Dich ausgelagert. Deine Aufgabe ist es, das Web-Frontend für die technischen Dokumente zu entwickeln und die Texte mit einem Script zu gendern.
+Vordefinierte Texte im generischen Maskulinum in gendergerechte Sprache "übersetzen". 
 
 ## Ziel:
 Funktional, zugänglich, ohne Frameworks. Design orientiert sich an Deepl.
