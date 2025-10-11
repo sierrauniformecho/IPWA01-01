@@ -62,7 +62,7 @@
             content: none !important;
         }
 
-        /* Hilfetext ausblenden, sobald Nutzer:in tippt (Placeholder verschwindet) */
+        /* Hilfetext ausblenden, sobald User tippt (Placeholder verschwindet) */
         #siteSearch input:not(:placeholder-shown)+.form-text {
             display: none;
         }
@@ -78,9 +78,10 @@
     <header class="border-bottom bg-body-tertiary py-3">
         <div class="container">
             <div class="d-flex align-items-center justify-content-between gap-3">
-                <!-- Brand left -->
+                <!-- Logo links -->
                 <div class="brand d-flex align-items-center gap-2">
-                    <a href="#">
+                    <a class="brand-link d-inline-flex align-items-center gap-2" href="index.html"
+                        aria-label="Startseite – Genderly">
                         <span aria-hidden="true">
                             <!-- Icon -->
                             <svg viewBox="0 0 64 64" role="img" aria-label="Genderly Logo – Icon"
@@ -103,20 +104,17 @@
                     <!-- Links (unten) -->
                     <nav aria-label="Sekundäre Navigation">
                         <ul class="nav small">
-                            <li class="nav-item"><a class="nav-link p-1" href="gender_types.html">Gender-Formen (Erklärung)</a></li>
+                            <li class="nav-item"><a class="nav-link p-1" href="gender_types.html">Gender-Formen
+                                    (Erklärung)</a></li>
                             <li class="nav-item"><a class="nav-link p-1" href="help.html">Hilfestellung</a></li>
                             <li class="nav-item"><a class="nav-link p-1" href="contact.html">Kontakt</a></li>
-                            <!-- RTL demo toggle -->
+                            <!-- demo flip -->
                             <li class="nav-item ms-2">
                                 <button id="toggleDir" class="btn btn-sm btn-outline-primary">RTL spiegeln</button>
                             </li>
                         </ul>
                     </nav>
                 </div>
-            </div>
-
-            <!-- search feedback -->
-            <div id="searchFeedback" class="alert alert-info py-2 px-3 mt-3 d-none" role="status" aria-live="polite">
             </div>
         </div>
     </header>
@@ -126,7 +124,8 @@
             <!-- mittige Suchleiste -->
             <form id="siteSearch" class="search-wrap w-100" role="search" aria-label="Suche in Hilfe &amp; Regeln">
                 <label for="q" class="visually-hidden">Suche</label>
-                <input id="q" name="q" class="form-control form-control-lg rounded-pill shadow-sm search-input" type="search" placeholder="Regel, Begriff oder Thema suchen…" />
+                <input id="q" name="q" class="form-control form-control-lg rounded-pill shadow-sm search-input"
+                    type="search" placeholder="Regel, Begriff oder Thema suchen…" />
                 <div class="form-text">Durchsucht nur die Infoseiten, nicht den Beispieltext.</div>
             </form>
 
@@ -141,55 +140,58 @@
             <!-- RTL flip -->
             <div id="contentRow" class="row g-4">
                 <!-- flipt bei LTR nach rechts, bei RTL nach links -->
-                <aside class="col-lg-4 col-12">
+                <aside class="col-lg-3 col-12">
                     <nav class="local-nav sticky-top-24" aria-label="Lokale Navigation">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item active"><a class="nav-link" href="#demo">Demo &amp; Übersetzer</a></li>
                             <li class="nav-item"><a class="nav-link" href="#beispiele">Beispieltexte</a></li>
                             <li class="nav-item"><a class="nav-link" href="#regeln">Begründung &amp; Regeln</a></li>
-                            <li class="nav-item"><a class="nav-link" href="gender_types.html">Gender-Formen (Erklärung)</a></li>
+                            <li class="nav-item"><a class="nav-link" href="gender_types.html">Gender-Formen
+                                    (Erklärung)</a></li>
                         </ul>
                     </nav>
                 </aside>
 
                 <!-- Übersetzer -->
-                <section class="col-lg-8 col-12">
+                <section class="col-lg-9 col-12">
                     <section id="demo" class="card border-0 shadow-sm mb-4">
                         <div class="card-body">
                             <div class="row g-3">
-                                <!-- Links readonly -->
+                                <!-- Linker Kasten (readonly) -->
                                 <div class="col-md-6">
+                                    <!-- Auswahlbox -->
                                     <label for="sample" class="form-label fw-semibold">Beispiel wählen</label>
-                                    <select id="sample" class="form-select" aria-describedby="sampleHelp">
-                                        <option value="verwaltung">Verwaltung: Einladung zur Sitzung</option>
-                                        <option value="hochschule">Hochschule: Studienhinweise</option>
-                                        <option value="website">Website: Stellenanzeige</option>
+                                    <select id="sample" class="form-select" aria-describedby="picksample">
+                                        <option value="secureforms">Installation und Erstkonfiguration des CMS-Plugins "Secureforms"</option>
+                                        <option value="vpn">VPN-Client einrichten (Windows)</option>
+                                        <option value="helpdesktickets">Tickets im Helpdesk bearbeiten</option>
                                     </select>
+                                    <!-- Textfeld (readonly) -->
                                     <textarea id="src" class="form-control mono mt-2" rows="10" readonly></textarea>
                                     <div id="sampleHelp" class="form-text">Beispieltext (readonly). Ausgabe rechts.
                                     </div>
                                 </div>
 
-                                <!-- Rechts Ausgabe -->
+                                <!-- Rechter Kasten -->
                                 <div class="col-md-6">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="w-100 me-2">
-                                            <label for="variant"
-                                                class="form-label fw-semibold mb-1">Gender-Variante</label>
-                                            <select id="variant" class="form-select">
+                                            <label for="type" class="form-label fw-semibold">Gender-Variante</label>
+                                            <!-- Fragezeichen -> gender_types -->
+                                            <a class="text-decoration-none small" href="gender_types.html"
+                                                target="_self" aria-label="Mehr zu Gender-Formen">
+                                                <span class="badge text-bg-secondary">?</span>
+                                            </a>
+                                            <!-- Auswahlbox -->
+                                            <select id="type" class="form-select">
                                                 <option value="neutral">Neutrale Form (empfohlen)</option>
                                                 <option value="doppelpunkt">Gender-Doppelpunkt</option>
                                                 <option value="stern">Genderstern</option>
                                             </select>
                                         </div>
-                                        <a class="text-decoration-none small" href="gender_types.html" target="_self"
-                                            aria-label="Mehr zu Gender-Formen">
-                                            <span class="badge text-bg-secondary">?</span>
-                                        </a>
                                     </div>
-
-                                    <textarea id="dst" class="form-control mono mt-2" rows="10"
-                                        aria-label="Ausgabe (kopierbar)"></textarea>
+                                    <!-- Textfeld (kopierbar) -->
+                                    <textarea id="dst" class="form-control mono mt-2" rows="10" aria-label="Ausgabe (kopierbar)"></textarea>
                                     <div class="d-flex align-items-center gap-2 mt-2">
                                         <button id="copyBtn" class="btn btn-primary">Text kopieren</button>
                                         <button id="explainBtn" class="btn btn-outline-secondary">Begründung anzeigen</button>
@@ -199,7 +201,8 @@
                                     <div id="explain" class="mt-3 d-none">
                                         <div class="alert alert-secondary mb-2 py-2">
                                             <strong>Warum diese Formulierung?</strong><br>
-                                            Neutrale Berufs-/Rollenbezeichnungen verbessern Lesbarkeit. Eigennamen &amp; Zitate bleiben unverändert.
+                                            Neutrale Berufs-/Rollenbezeichnungen verbessern Lesbarkeit. Eigennamen &amp;
+                                            Zitate bleiben unverändert.
                                         </div>
                                         <ul id="changelog" class="small mb-0"></ul>
                                     </div>
@@ -213,7 +216,8 @@
                         <h2 class="h5">Begründung &amp; Regeln</h2>
                         <ol class="mb-2">
                             <li><strong>Priorität:</strong> Neutrale Formen &gt; Doppelpunkt &gt; Stern.</li>
-                            <li><strong>Ausnahmen:</strong> Eigennamen/Zitate unverändert; juristische Passagen mit Hinweis.</li>
+                            <li><strong>Ausnahmen:</strong> Eigennamen/Zitate unverändert; juristische Passagen mit
+                                Hinweis.</li>
                             <li><strong>Ambiguität:</strong> „Leiter“ → „Leitung“ (Rolle/Institution).</li>
                         </ol>
                         <p class="small text-body-secondary mb-0">Hinweis: Demo-Logik, keine vollständige Linguistik.
@@ -227,7 +231,8 @@
     <!-- Footer -->
     <footer class="border-top bg-body-tertiary py-4 mt-4">
         <div class="container">
-            <p class="mb-2 small"> Uni-Abgabe. Nicht produktiv. Inhalte ohne Gewähr. Marken/Urheberrechte Dritter bleiben unberührt.
+            <p class="mb-2 small"> Uni-Abgabe. Nicht produktiv. Inhalte ohne Gewähr. Marken/Urheberrechte Dritter
+                bleiben unberührt.
             </p>
             <nav aria-label="Recht & Info">
                 <ul class="nav">
@@ -242,20 +247,150 @@
     </footer>
 
     <!-- JavaScript-->
+    <!-- minimal demo -->
     <script type="text/javascript">
-        document.querySelector("form").onsubmit = function () {
-            // Wert des Suche-Feldes bestimmen
-            let suche = document.querySelector("input").value;
-            if (suche.length < 3) {
-                alert("Bitte mindestens 3 Zeichen eingeben.");
+        // --- RTL demo toggle: flips the content row visually when dir="rtl"
+        const contentRow = document.getElementById('contentRow');
+        function applyDirLayout() {
+            if (document.documentElement.dir === 'rtl') {
+                contentRow.classList.add('flex-row-reverse');
             } else {
-                // Style ist ein Object, daher einfach eine Eigenschaft setzen
-                let h1 = document.querySelector("h1");
-                h1.innerText = "Noch nicht unterstützt";
-                h1.style["background-color"] = "green";
+                contentRow.classList.remove('flex-row-reverse');
             }
-            return false; // Formular nicht absenden
         }
+        document.getElementById('toggleDir').addEventListener('click', () => {
+            const html = document.documentElement;
+            html.dir = (html.dir === 'rtl') ? 'ltr' : 'rtl';
+            applyDirLayout();
+            document.getElementById('toggleDir').textContent = (html.dir === 'rtl') ? 'LTR spiegeln' : 'RTL spiegeln';
+        });
+        applyDirLayout();
+
+        // --- Suchleiste
+        document.querySelector("#siteSearch").onsubmit = function (e) {
+            e.preventDefault();
+
+            const q = (document.querySelector("#q")?.value || "").trim();
+            const box = document.querySelector("#searchFeedback");
+
+            if (!box) return;
+
+            // Mindestens 3 Zeichen als Suchwort
+            if (q.length < 3) {
+                box.className = "alert alert-warning py-2 px-3"; // Bootstrap-Styles
+                box.textContent = "Bitte mindestens 3 Zeichen eingeben.";
+            } else {
+                box.className = "alert alert-info py-2 px-3";
+                box.textContent = `Noch nicht unterstützt: „${q}“. (Demo durchsucht nur Infoseiten.)`;
+            }
+        };
+
+        // Feedback ausblenden, wenn Feld wieder geleert wird
+        document.querySelector("#q")?.addEventListener("input", function () {
+            const box = document.querySelector("#searchFeedback");
+            if (!box) return;
+            if (this.value.trim().length === 0) {
+                box.className = "alert alert-info py-2 px-3 d-none";
+                box.textContent = "";
+            }
+        });
+
+        // --- Beispieltexte - generisches Maskulinum
+        const samples = [
+            {
+                id: "secureforms",
+                label: "Installation und Erstkonfiguration des CMS-Plugins „SecureForms“",
+                text: 'Der Administrator lädt das Paket aus dem Kundenbereich herunter und speichert es in seinem Projektordner. Anschließend meldet sich der Benutzer im Backend an und öffnet seinen Plugin-Manager. Der Entwickler prüft die Systemvoraussetzungen und aktiviert das Modul in seiner Umgebung. Wer Änderungen an der Konfiguration vornimmt, dokumentiert sie in seinem Protokoll.Jeder Redakteur aktualisiert nach der Aktivierung seine Seiten, damit der Leser die neuen Formulare in seinem Browser korrekt sieht. Der Autor legt in seinem Arbeitsbereich ein Formular an, vergibt seinen Titel und ordnet es seinem Menüpunkt zu.Man sollte darauf achten, dass man seine Felder eindeutig benennt.Der Prüfer testet die Eingaben und bestätigt seine Ergebnisse im Ticket. Niemand darf wegen seines Zugangsniveaus seine Passwörter weitergeben.Hat gestern jemand seine Zugangsdaten im Büro liegen lassen, meldet er den Vorfall seinem Vorgesetzten. Zum Schluss veröffentlicht der Betreiber seine Änderungen und informiert die Nutzer über seine neuen Datenschutzregeln.Der Support weist den Kunden darauf hin, dass er seine Cookies akzeptieren muss, damit das Tracking funktioniert.'
+            },
+            {
+                id: "vpn",
+                label: "VPN-Client einrichten (Windows)",
+                text: 'Der Mitarbeiter öffnet seinen Browser und lädt den VPN-Client von der Intranetseite herunter. Danach startet der Benutzer den Installer und bestätigt seine Auswahl mit seinem Administratorkennwort. Im nächsten Schritt trägt der Anwender seine Serveradresse ein und speichert sein Profil. Wer unterwegs arbeitet, aktiviert in seinem Client die Option „Automatisch verbinden“. Man sollte seine Verbindung nach jeder Änderung neu testen. Der Administrator verteilt seine Zertifikate zentral und prüft seine Gültigkeit einmal pro Quartal. Jeder Kollege kontrolliert seine Uhrzeit-Synchronisation, sonst schlägt seine Anmeldung fehl. Bei Störungen prüft der Techniker seine Firewallregeln und setzt seinen Dienst neu. Hat jemand seine Lizenz überschritten, entfernt er sein Zweitgerät aus der Verwaltung. Niemand protokolliert seine privaten Webseiten im Firmennetz. Abschließend verbindet sich der Nutzer mit seinem Profil „Office“, öffnet seine Projektordner und bestätigt seine Erreichbarkeit im Chat. Der Teamleiter erinnert die Abteilung daran, dass der Benutzer seine Passphrase alle 90 Tage ändert.'
+            },
+            {
+                id: "helpdesktickets",
+                label: "Tickets im Helpdesk bearbeiten",
+                text: 'Der Support-Mitarbeiter nimmt das Ticket entgegen und vergibt seine Priorität nach seinem Leitfaden. Der Bearbeiter ergänzt seine Notizen und weist das Ticket dem Entwickler zu. Wer einen Hotfix plant, beschreibt seinen Lösungsweg und hängt seine Logs an. Man erstellt seine Wiederherstellungs-punkte, bevor man seine Änderungen ausrollt. Jeder Kunde erhält seine Eingangsbestätigung mit seiner Ticketnummer. Der Analyst bewertet seinen Impact auf das System und aktualisiert seine Kennzahlen im Board. Hat gestern jemand seine Rückfrage unbeantwortet gelassen, erinnert er den Antragsteller an seine Mitwirkungspflicht. Niemand schließt sein Ticket, bevor sein Testfall bestanden ist. Der Projektleiter fasst seine Ergebnisse im Abschlusskommentar zusammen, verlinkt seine Dokumentation und markiert das Ticket als „Erledigt“. Der Auditor prüft stichprobenartig, ob der Mitarbeiter seine Checkliste eingehalten hat. Zum Monatsende erstellt der Verantwortliche seinen Report und präsentiert seine Trends im Meeting.'
+            }
+        ]
+
+        const src = document.getElementById('src');
+        const dst = document.getElementById('dst');
+        const sampleSel = document.getElementById('sample');
+        const variantSel = document.getElementById('variant');
+        const changelogEl = document.getElementById('changelog');
+
+        function setSample() {
+            src.value = samples[sampleSel.value] || '';
+            transform();
+        }
+
+        function transform() {
+            const v = variantSel.value;
+            const text = src.value;
+            let out = text;
+            let changes = [];
+
+            // Replacements
+            const rulesNeutral = [
+                [/Mitarbeiter\b/g, 'Mitarbeitende'],
+                [/Leiter\b/g, 'Leitung']
+            ];
+
+            const rulesDoppelpunkt = [
+                [/Mitarbeiter\b/g, 'Mitarbeiter:innen'],
+                [/Studenten\b/g, 'Student:innen']
+            ];
+
+            const rulesStern = [
+                [/Mitarbeiter\b/g, 'Mitarbeiter*innen'],
+                [/Studenten\b/g, 'Student*innen']
+            ];
+
+            const applyRules = (rules) => {
+                let result = text;
+                rules.forEach(([re, repl]) => {
+                    if (re.test(result)) {
+                        result = result.replace(re, (m) => { changes.push(`${m} → ${repl}`); return repl; });
+                    }
+                });
+                return result;
+            };
+
+            if (v === 'neutral') out = applyRules(rulesNeutral);
+            if (v === 'doppelpunkt') out = applyRules(rulesDoppelpunkt);
+            if (v === 'stern') out = applyRules(rulesStern);
+
+            dst.value = out;
+            // simple changelog
+            changelogEl.innerHTML = changes.length
+                ? changes.map(c => `<li>${c}</li>`).join('')
+                : '<li>Keine Änderungen notwendig.</li>';
+        }
+
+        sampleSel.addEventListener('change', setSample);
+        variantSel.addEventListener('change', transform);
+
+        // Initialisierung
+        setSample();
+
+        // Kopieren button
+        document.getElementById('copyBtn').addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(dst.value);
+                const btn = document.getElementById('copyBtn');
+                const old = btn.textContent;
+                btn.textContent = 'Kopiert ✓';
+                setTimeout(() => btn.textContent = old, 2000);
+            } catch {
+                alert('Kopieren nicht möglich.');
+            }
+        });
+
+        // Explain toggle
+        document.getElementById('explainBtn').addEventListener('click', () => {
+            document.getElementById('explain').classList.toggle('d-none');
+        });
     </script>
 </body>
 
