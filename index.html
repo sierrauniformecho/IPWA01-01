@@ -247,9 +247,9 @@
     </footer>
 
     <!-- JavaScript-->
-    <!-- minimal demo -->
+    <!-- toggle -->
     <script type="text/javascript">
-        // --- RTL demo toggle: flips the content row visually when dir="rtl"
+        // --- flips the content row visually when dir="rtl"
         const contentRow = document.getElementById('contentRow');
         function applyDirLayout() {
             if (document.documentElement.dir === 'rtl') {
@@ -258,6 +258,7 @@
                 contentRow.classList.remove('flex-row-reverse');
             }
         }
+        // --- toggle button
         document.getElementById('toggleDir').addEventListener('click', () => {
             const html = document.documentElement;
             html.dir = (html.dir === 'rtl') ? 'ltr' : 'rtl';
@@ -266,11 +267,11 @@
         });
         applyDirLayout();
 
-        // --- Suchleiste
-        document.querySelector("#siteSearch").onsubmit = function (e) {
+        // --- search bar
+        document.querySelector("#searchbar").onsubmit = function (e) {
             e.preventDefault();
 
-            const q = (document.querySelector("#q")?.value || "").trim();
+            const q = (document.querySelector("input")?.value || "").trim();
             const box = document.querySelector("#searchFeedback");
 
             if (!box) return;
@@ -286,7 +287,7 @@
         };
 
         // Feedback ausblenden, wenn Feld wieder geleert wird
-        document.querySelector("#q")?.addEventListener("input", function () {
+        document.querySelector("input")?.addEventListener("input", function () {
             const box = document.querySelector("#searchFeedback");
             if (!box) return;
             if (this.value.trim().length === 0) {
@@ -300,15 +301,15 @@
             {
                 id: "secureforms",
                 label: "Installation und Erstkonfiguration des CMS-Plugins „SecureForms“",
-                text: 'Der Administrator lädt das Paket aus dem Kundenbereich herunter und speichert es in seinem Projektordner. Anschließend meldet sich der Benutzer im Backend an und öffnet seinen Plugin-Manager. Der Entwickler prüft die Systemvoraussetzungen und aktiviert das Modul in seiner Umgebung. Wer Änderungen an der Konfiguration vornimmt, dokumentiert sie in seinem Protokoll.Jeder Redakteur aktualisiert nach der Aktivierung seine Seiten, damit der Leser die neuen Formulare in seinem Browser korrekt sieht. Der Autor legt in seinem Arbeitsbereich ein Formular an, vergibt seinen Titel und ordnet es seinem Menüpunkt zu.Man sollte darauf achten, dass man seine Felder eindeutig benennt.Der Prüfer testet die Eingaben und bestätigt seine Ergebnisse im Ticket. Niemand darf wegen seines Zugangsniveaus seine Passwörter weitergeben.Hat gestern jemand seine Zugangsdaten im Büro liegen lassen, meldet er den Vorfall seinem Vorgesetzten. Zum Schluss veröffentlicht der Betreiber seine Änderungen und informiert die Nutzer über seine neuen Datenschutzregeln.Der Support weist den Kunden darauf hin, dass er seine Cookies akzeptieren muss, damit das Tracking funktioniert.'
+                text: 'Der Administrator lädt das Paket aus dem Kundenbereich herunter und speichert es in seinem Projektordner. Anschließend meldet sich der Benutzer im Backend an und öffnet seinen Plugin-Manager. Der Entwickler prüft die Systemvoraussetzungen und aktiviert das Modul in seiner Umgebung. Wer Änderungen an der Konfiguration vornimmt, dokumentiert sie in seinem Protokoll. Jeder Redakteur aktualisiert nach der Aktivierung seine Seiten, damit der Leser die neuen Formulare in seinem Browser korrekt sieht. Der Autor legt in seinem Arbeitsbereich ein Formular an, vergibt seinen Titel und ordnet es seinem Menüpunkt zu. Man sollte darauf achten, dass man seine Felder eindeutig benennt. Der Prüfer testet die Eingaben und bestätigt seine Ergebnisse im Ticket. Niemand darf wegen seines Zugangsniveaus seine Passwörter weitergeben. Hat gestern jemand seine Zugangsdaten im Büro liegen lassen, meldet er den Vorfall seinem Vorgesetzten. Zum Schluss veröffentlicht der Betreiber seine Änderungen und informiert die Nutzer über seine neuen Datenschutzregeln. Der Support weist den Kunden darauf hin, dass er seine Cookies akzeptieren muss, damit das Tracking funktioniert.'
             },
             {
-                id: "vpn",
+                id: "vpn client (win)",
                 label: "VPN-Client einrichten (Windows)",
                 text: 'Der Mitarbeiter öffnet seinen Browser und lädt den VPN-Client von der Intranetseite herunter. Danach startet der Benutzer den Installer und bestätigt seine Auswahl mit seinem Administratorkennwort. Im nächsten Schritt trägt der Anwender seine Serveradresse ein und speichert sein Profil. Wer unterwegs arbeitet, aktiviert in seinem Client die Option „Automatisch verbinden“. Man sollte seine Verbindung nach jeder Änderung neu testen. Der Administrator verteilt seine Zertifikate zentral und prüft seine Gültigkeit einmal pro Quartal. Jeder Kollege kontrolliert seine Uhrzeit-Synchronisation, sonst schlägt seine Anmeldung fehl. Bei Störungen prüft der Techniker seine Firewallregeln und setzt seinen Dienst neu. Hat jemand seine Lizenz überschritten, entfernt er sein Zweitgerät aus der Verwaltung. Niemand protokolliert seine privaten Webseiten im Firmennetz. Abschließend verbindet sich der Nutzer mit seinem Profil „Office“, öffnet seine Projektordner und bestätigt seine Erreichbarkeit im Chat. Der Teamleiter erinnert die Abteilung daran, dass der Benutzer seine Passphrase alle 90 Tage ändert.'
             },
             {
-                id: "helpdesktickets",
+                id: "helpdesk tickets",
                 label: "Tickets im Helpdesk bearbeiten",
                 text: 'Der Support-Mitarbeiter nimmt das Ticket entgegen und vergibt seine Priorität nach seinem Leitfaden. Der Bearbeiter ergänzt seine Notizen und weist das Ticket dem Entwickler zu. Wer einen Hotfix plant, beschreibt seinen Lösungsweg und hängt seine Logs an. Man erstellt seine Wiederherstellungs-punkte, bevor man seine Änderungen ausrollt. Jeder Kunde erhält seine Eingangsbestätigung mit seiner Ticketnummer. Der Analyst bewertet seinen Impact auf das System und aktualisiert seine Kennzahlen im Board. Hat gestern jemand seine Rückfrage unbeantwortet gelassen, erinnert er den Antragsteller an seine Mitwirkungspflicht. Niemand schließt sein Ticket, bevor sein Testfall bestanden ist. Der Projektleiter fasst seine Ergebnisse im Abschlusskommentar zusammen, verlinkt seine Dokumentation und markiert das Ticket als „Erledigt“. Der Auditor prüft stichprobenartig, ob der Mitarbeiter seine Checkliste eingehalten hat. Zum Monatsende erstellt der Verantwortliche seinen Report und präsentiert seine Trends im Meeting.'
             }
@@ -333,18 +334,114 @@
 
             // Replacements
             const rulesNeutral = [
-                [/Mitarbeiter\b/g, 'Mitarbeitende'],
-                [/Leiter\b/g, 'Leitung']
+                [/Der Administrator\b/g, 'Das Admin-Team'],
+                [/meldet sich der Benutzer\b/g, 'melden sich die Benutzenden'],
+                [/Der Entwickler prüft\b/g, 'Die Entwicklenden prüfen'],
+                [/Jeder Redaktur aktualisiert\b/g, 'Alle Redaktionsmitglieder aktualisieren'],
+                [/der Leser\b/g, 'die Leserschaft'],
+                [/Der Autor\b/g, 'Die Autorenschaft'],
+                [/Der Prüfer testet\b/g, 'Die Prüfenden testen'],
+                [/veröffentlicht der Betreiber\b/g, 'veröffentlichen der Betreibende'],
+                [/Der Support\b/g, 'Die Supportabteilung'],
+                [/seine\b/g, 'die'],
+                [/seinem Vorgesetzten\b/g, 'der*die Vorgesetzte']
+                [/seinem\b/g, 'dem eigenen'],
+                [/seinen\b/g, 'den eigenen'],
+                [/seiner\b/g, 'der eigenen'],
+                [/seines\b/g, 'des eigenen'],
+                [/den Kunden\b/g, 'die Kundschaft'],
+                [/Der Mitarbeiter\b/g, 'Die Mitarbeitenden'],
+                [/startet der Benutzer\b/g, 'starten die Benutzenden'],
+                [/trägt der Anwender\b/g, 'tragen die Anwendenden'],
+                [/sein\b/g, 'ihr'],
+                [/Jeder Kollege\b/g, 'Die Kollegschaft'],
+                [/der Techniker\b/g, 'das Technik-Team'],
+                [/sein Zweitgerät\b/g, 'das eigene Zweitgerät'],
+                [/der Nutzer\b/g, 'der Nutzende'],
+                [/Der Teamleiter\b/g, 'Der*die Teamleitende'],
+                [/der Benutzer\b/g, 'die Benutzenden'],
+                [/Der Support-Mitarbeiter\b/g, 'Die Support-Mitarbeitenden'],
+                [/Der Bearbeiter ergänzt\b/g, 'Die Bearbeitenden ergänzen'],
+                [/dem Entwickler\b/g, 'den Entwickelnden'],
+                [/Der Analyst bewertet\b/g, 'die Analysten bewerten'],
+                [/Der Projektleiter fasst\b/g, 'Die Projektleitenden fassen'],
+                [/Der Auditor\b/g, 'Die Auditorenschaft'],
+                [/der Mitarbeiter\b/g, 'die Mitarbeiterschaft'],
+                [/erstellt der Verantwortliche\b/g, 'erstellen die Verantwortlichen']
             ];
 
             const rulesDoppelpunkt = [
-                [/Mitarbeiter\b/g, 'Mitarbeiter:innen'],
-                [/Studenten\b/g, 'Student:innen']
+                [/Der Administrator\b/g, ''],
+                [/meldet sich der Benutzer\b/g, ''],
+                [/Der Entwickler prüft\b/g, ''],
+                [/Jeder Redaktur aktualisiert\b/g, ''],
+                [/der Leser\b/g, ''],
+                [/Der Autor\b/g, ''],
+                [/Der Prüfer testet\b/g, ''],
+                [/veröffentlicht der Betreiber\b/g, ''],
+                [/Der Support\b/g, ''],
+                [/seine\b/g, ''],
+                [/seinem Vorgesetzten\b/g, '']
+                [/seinem\b/g, ''],
+                [/seinen\b/g, ''],
+                [/seiner\b/g, ''],
+                [/seines\b/g, ''],
+                [/den Kunden\b/g, ''],
+                [/Der Mitarbeiter\b/g, ''],
+                [/startet der Benutzer\b/g, ''],
+                [/trägt der Anwender\b/g, ''],
+                [/sein\b/g, ''],
+                [/Jeder Kollege\b/g, ''],
+                [/der Techniker\b/g, ''],
+                [/sein Zweitgerät\b/g, ''],
+                [/der Nutzer\b/g, ''],
+                [/Der Teamleiter\b/g, ''],
+                [/der Benutzer\b/g, ''],
+                [/Der Support-Mitarbeiter\b/g, ''],
+                [/Der Bearbeiter ergänzt\b/g, ''],
+                [/dem Entwickler\b/g, ''],
+                [/Der Analyst bewertet\b/g, ''],
+                [/Der Projektleiter fasst\b/g, ''],
+                [/Der Auditor\b/g, ''],
+                [/der Mitarbeiter\b/g, ''],
+                [/erstellt der Verantwortliche\b/g, '']
             ];
 
             const rulesStern = [
-                [/Mitarbeiter\b/g, 'Mitarbeiter*innen'],
-                [/Studenten\b/g, 'Student*innen']
+                [/Der Administrator\b/g, ''],
+                [/meldet sich der Benutzer\b/g, ''],
+                [/Der Entwickler prüft\b/g, ''],
+                [/Jeder Redaktur aktualisiert\b/g, ''],
+                [/der Leser\b/g, ''],
+                [/Der Autor\b/g, ''],
+                [/Der Prüfer testet\b/g, ''],
+                [/veröffentlicht der Betreiber\b/g, ''],
+                [/Der Support\b/g, ''],
+                [/seine\b/g, ''],
+                [/seinem Vorgesetzten\b/g, '']
+                [/seinem\b/g, ''],
+                [/seinen\b/g, ''],
+                [/seiner\b/g, ''],
+                [/seines\b/g, ''],
+                [/den Kunden\b/g, ''],
+                [/Der Mitarbeiter\b/g, ''],
+                [/startet der Benutzer\b/g, ''],
+                [/trägt der Anwender\b/g, ''],
+                [/sein\b/g, ''],
+                [/Jeder Kollege\b/g, ''],
+                [/der Techniker\b/g, ''],
+                [/sein Zweitgerät\b/g, ''],
+                [/der Nutzer\b/g, ''],
+                [/Der Teamleiter\b/g, ''],
+                [/der Benutzer\b/g, ''],
+                [/Der Support-Mitarbeiter\b/g, ''],
+                [/Der Bearbeiter ergänzt\b/g, ''],
+                [/dem Entwickler\b/g, ''],
+                [/Der Analyst bewertet\b/g, ''],
+                [/Der Projektleiter fasst\b/g, ''],
+                [/Der Auditor\b/g, ''],
+                [/der Mitarbeiter\b/g, ''],
+                [/erstellt der Verantwortliche\b/g, '']
             ];
 
             const applyRules = (rules) => {
