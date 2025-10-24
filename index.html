@@ -63,7 +63,7 @@
         }
 
         /* Hilfetext ausblenden, sobald User tippt (Placeholder verschwindet) */
-        #siteSearch input:not(:placeholder-shown)+.form-text {
+        #searchbar input:not(:placeholder-shown)+.form-text {
             display: none;
         }
     </style>
@@ -104,8 +104,6 @@
                     <!-- Links (unten) -->
                     <nav aria-label="Sekundäre Navigation">
                         <ul class="nav small">
-                            <li class="nav-item"><a class="nav-link p-1" href="gender_types.html">Gender-Formen
-                                    (Erklärung)</a></li>
                             <li class="nav-item"><a class="nav-link p-1" href="help.html">Hilfestellung</a></li>
                             <li class="nav-item"><a class="nav-link p-1" href="contact.html">Kontakt</a></li>
                             <!-- demo flip -->
@@ -122,11 +120,10 @@
     <section class="border-bottom bg-body py-5">
         <div class="container d-flex flex-column align-items-center text-center gap-4">
             <!-- mittige Suchleiste -->
-            <form id="siteSearch" class="search-wrap w-100" role="search" aria-label="Suche in Hilfe &amp; Regeln">
+            <form id="searchbar" class="search-wrap w-100" role="search" aria-label="Suche in Hilfe &amp; Regeln">
                 <label for="q" class="visually-hidden">Suche</label>
                 <input id="q" name="q" class="form-control form-control-lg rounded-pill shadow-sm search-input"
                     type="search" placeholder="Regel, Begriff oder Thema suchen…" />
-                <div class="form-text">Durchsucht nur die Infoseiten, nicht den Beispieltext.</div>
             </form>
 
             <!-- Such-Feedback (wandert mit nach unten) -->
@@ -143,9 +140,9 @@
                 <aside class="col-lg-3 col-12">
                     <nav class="local-nav sticky-top-24" aria-label="Lokale Navigation">
                         <ul class="nav nav-pills flex-column">
-                            <li class="nav-item active"><a class="nav-link" href="#demo">Demo &amp; Übersetzer</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#beispiele">Beispieltexte</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#regeln">Begründung &amp; Regeln</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="#translator">Übersetzer</a></li>
+                            <li class="nav-item"><a class="nav-link" href="examples.html">Beispieltexte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="rules.html">Begründung &amp; Regeln</a></li>
                             <li class="nav-item"><a class="nav-link" href="gender_types.html">Gender-Formen
                                     (Erklärung)</a></li>
                         </ul>
@@ -162,9 +159,11 @@
                                     <!-- Auswahlbox -->
                                     <label for="sample" class="form-label fw-semibold">Beispiel wählen</label>
                                     <select id="sample" class="form-select" aria-describedby="picksample">
-                                        <option value="secureforms">Installation und Erstkonfiguration des CMS-Plugins "Secureforms"</option>
-                                        <option value="vpn">VPN-Client einrichten (Windows)</option>
-                                        <option value="helpdesktickets">Tickets im Helpdesk bearbeiten</option>
+                                        <option value="" selected disabled>Beispiel wählen</option>
+                                        <option value="1">Installation und Erstkonfiguration des CMS-Plugins
+                                            "Secureforms"</option>
+                                        <option value="2">VPN-Client einrichten (Windows)</option>
+                                        <option value="3">Tickets im Helpdesk bearbeiten</option>
                                     </select>
                                     <!-- Textfeld (readonly) -->
                                     <textarea id="src" class="form-control mono mt-2" rows="10" readonly></textarea>
@@ -183,7 +182,8 @@
                                                 <span class="badge text-bg-secondary">?</span>
                                             </a>
                                             <!-- Auswahlbox -->
-                                            <select id="type" class="form-select">
+                                            <select id="variant" class="form-select">
+                                                <option value="" selected disabled>Übersetzung wählen</option>
                                                 <option value="neutral">Neutrale Form</option>
                                                 <option value="doppelpunkt">Gender-Doppelpunkt</option>
                                                 <option value="stern">Genderstern</option>
@@ -288,7 +288,7 @@
             }
         };
 
-        // Feedback ausblenden, wenn Feld wieder geleert wird
+        // ausblenden, wenn Feld wieder geleert wird
         document.querySelector("input")?.addEventListener("input", function () {
             const box = document.querySelector("#searchFeedback");
             if (!box) return;
@@ -301,17 +301,17 @@
         // --- Beispieltexte - generisches Maskulinum
         const samples = [
             {
-                id: "secureforms",
+                id: "1",
                 label: "Installation und Erstkonfiguration des CMS-Plugins „SecureForms“",
                 text: 'Der Administrator lädt das Paket aus dem Kundenbereich herunter und speichert es in seinem Projektordner. Anschließend meldet sich der Benutzer im Backend an und öffnet seinen Plugin-Manager. Der Entwickler prüft die Systemvoraussetzungen und aktiviert das Modul in seiner Umgebung. Wer Änderungen an der Konfiguration vornimmt, dokumentiert sie in seinem Protokoll. Jeder Redakteur aktualisiert nach der Aktivierung seine Seiten, damit der Leser die neuen Formulare in seinem Browser korrekt sieht. Der Autor legt in seinem Arbeitsbereich ein Formular an, vergibt seinen Titel und ordnet es seinem Menüpunkt zu. Man sollte darauf achten, dass man seine Felder eindeutig benennt. Der Prüfer testet die Eingaben und bestätigt seine Ergebnisse im Ticket. Niemand darf wegen seines Zugangsniveaus seine Passwörter weitergeben. Hat gestern jemand seine Zugangsdaten im Büro liegen lassen, meldet er den Vorfall seinem Vorgesetzten. Zum Schluss veröffentlicht der Betreiber seine Änderungen und informiert die Nutzer über seine neuen Datenschutzregeln. Der Support weist den Kunden darauf hin, dass er seine Cookies akzeptieren muss, damit das Tracking funktioniert.'
             },
             {
-                id: "vpn client (win)",
+                id: "2",
                 label: "VPN-Client einrichten (Windows)",
                 text: 'Der Mitarbeiter öffnet seinen Browser und lädt den VPN-Client von der Intranetseite herunter. Danach startet der Benutzer den Installer und bestätigt seine Auswahl mit seinem Administratorkennwort. Im nächsten Schritt trägt der Anwender seine Serveradresse ein und speichert sein Profil. Wer unterwegs arbeitet, aktiviert in seinem Client die Option „Automatisch verbinden“. Man sollte seine Verbindung nach jeder Änderung neu testen. Der Administrator verteilt seine Zertifikate zentral und prüft seine Gültigkeit einmal pro Quartal. Jeder Kollege kontrolliert seine Uhrzeit-Synchronisation, sonst schlägt seine Anmeldung fehl. Bei Störungen prüft der Techniker seine Firewallregeln und setzt seinen Dienst neu. Hat jemand seine Lizenz überschritten, entfernt er sein Zweitgerät aus der Verwaltung. Niemand protokolliert seine privaten Webseiten im Firmennetz. Abschließend verbindet sich der Nutzer mit seinem Profil „Office“, öffnet seine Projektordner und bestätigt seine Erreichbarkeit im Chat. Der Teamleiter erinnert die Abteilung daran, dass der Benutzer seine Passphrase alle 90 Tage ändert.'
             },
             {
-                id: "helpdesk tickets",
+                id: "3",
                 label: "Tickets im Helpdesk bearbeiten",
                 text: 'Der Support-Mitarbeiter nimmt das Ticket entgegen und vergibt seine Priorität nach seinem Leitfaden. Der Bearbeiter ergänzt seine Notizen und weist das Ticket dem Entwickler zu. Wer einen Hotfix plant, beschreibt seinen Lösungsweg und hängt seine Logs an. Man erstellt seine Wiederherstellungs-punkte, bevor man seine Änderungen ausrollt. Jeder Kunde erhält seine Eingangsbestätigung mit seiner Ticketnummer. Der Analyst bewertet seinen Impact auf das System und aktualisiert seine Kennzahlen im Board. Hat gestern jemand seine Rückfrage unbeantwortet gelassen, erinnert er den Antragsteller an seine Mitwirkungspflicht. Niemand schließt sein Ticket, bevor sein Testfall bestanden ist. Der Projektleiter fasst seine Ergebnisse im Abschlusskommentar zusammen, verlinkt seine Dokumentation und markiert das Ticket als „Erledigt“. Der Auditor prüft stichprobenartig, ob der Mitarbeiter seine Checkliste eingehalten hat. Zum Monatsende erstellt der Verantwortliche seinen Report und präsentiert seine Trends im Meeting.'
             }
@@ -324,13 +324,22 @@
         const changelogEl = document.getElementById('changelog');
 
         function setSample() {
-            src.value = samples[sampleSel.value] || '';
+            const i = parseInt(sampleSel.value, 10);
+            src.value = Number.isNaN(i) ? '' : (samples[i]?.text || '');
             transform();
         }
 
         function transform() {
             const v = variantSel.value;
             const text = src.value;
+
+            // keine Übersetzung gewählt → rechte Box leeren und abbrechen
+            if (!v) {
+                dst.value = '';
+                changelogEl.innerHTML = '';
+                return;
+            }
+
             let out = text;
             let changes = [];
 
@@ -346,13 +355,13 @@
                 [/veröffentlicht der Betreiber\b/g, 'veröffentlichen der Betreibende'],
                 [/Der Support\b/g, 'Die Supportabteilung'],
                 [/seine\b/g, 'die'],
-                [/seinem Vorgesetzten\b/g, 'der*die Vorgesetzte']
+                [/seinem Vorgesetzten\b/g, 'der*die Vorgesetzte'],
                 [/seinem\b/g, 'dem eigenen'],
                 [/seinen\b/g, 'den eigenen'],
                 [/seiner\b/g, 'der eigenen'],
                 [/seines\b/g, 'des eigenen'],
                 [/den Kunden\b/g, 'die Kundschaft'],
-                [/Der Mitarbeiter\b/g, 'Die Mitarbeitenden'],
+                [/Der Mitarbeiter öffnet\b/g, 'Die Mitarbeitenden öffnen'],
                 [/startet der Benutzer\b/g, 'starten die Benutzenden'],
                 [/trägt der Anwender\b/g, 'tragen die Anwendenden'],
                 [/sein\b/g, 'ihr'],

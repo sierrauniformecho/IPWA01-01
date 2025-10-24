@@ -138,17 +138,28 @@
     </section>
 
     <!-- Content-Bereich -->
-    <main id="main" class="py-5">
+    <main id="main" class="py-4">
         <div class="container">
-            <div class="row justify-content-center">
+            <!-- RTL flip -->
+            <div id="contentRow" class="row g-4">
+                <!-- flipt bei LTR nach rechts, bei RTL nach links -->
+                <aside class="col-lg-3 col-12">
+                    <nav class="local-nav sticky-top-24" aria-label="Lokale Navigation">
+                        <ul class="nav nav-pills flex-column">
+                            <li class="nav-item active"><a class="nav-link" href="#translator">Übersetzer</a></li>
+                            <li class="nav-item"><a class="nav-link" href="examples.html">Beispieltexte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="rules.html">Begründung &amp; Regeln</a></li>
+                            <li class="nav-item"><a class="nav-link" href="gender_types.html">Gender-Formen
+                                    (Erklärung)</a></li>
+                        </ul>
+                    </nav>
+                </aside>
                 <div class="col-12 col-lg-8 text-center">
                     <h1 class="display-6 mb-3">Nutzungsbedingungen</h1>
                     <p class="lead text-body-secondary">Nur Studienzwecke. Keine Gewähr. Keine kommerzielle Nutzung.
                         Weitergabe untersagt.
                     </p>
                 </div>
-            </div>
-        </div>
     </main>
 
     <!-- Footer -->
@@ -170,20 +181,54 @@
     </footer>
 
     <!-- JavaScript-->
+    <!-- toggle -->
     <script type="text/javascript">
-        document.querySelector("form").onsubmit = function () {
-            // Wert des Suche-Feldes bestimmen
-            let suche = document.querySelector("input").value;
-            if (suche.length < 3) {
-                alert("Bitte mindestens 3 Zeichen eingeben.");
+        // --- flips the content row visually when dir="rtl"
+        const contentRow = document.getElementById('contentRow');
+        function applyDirLayout() {
+            if (document.documentElement.dir === 'rtl') {
+                contentRow.classList.add('flex-row-reverse');
             } else {
-                // Style ist ein Object, daher einfach eine Eigenschaft setzen
-                let h1 = document.querySelector("h1");
-                h1.innerText = "Noch nicht unterstützt";
-                h1.style["background-color"] = "green";
+                contentRow.classList.remove('flex-row-reverse');
             }
-            return false; // Formular nicht absenden
         }
+        // --- toggle button
+        document.getElementById('toggleDir').addEventListener('click', () => {
+            const html = document.documentElement;
+            html.dir = (html.dir === 'rtl') ? 'ltr' : 'rtl';
+            applyDirLayout();
+            document.getElementById('toggleDir').textContent = (html.dir === 'rtl') ? 'LTR spiegeln' : 'RTL spiegeln';
+        });
+        applyDirLayout();
+
+        // --- search bar
+        document.querySelector("#searchbar").onsubmit = function (e) {
+            e.preventDefault();
+
+            const q = (document.querySelector("input")?.value || "").trim();
+            const box = document.querySelector("#searchFeedback");
+
+            if (!box) return;
+
+            // Mindestens 3 Zeichen als Suchwort
+            if (q.length < 3) {
+                box.className = "alert alert-warning py-2 px-3"; // Bootstrap-Styles
+                box.textContent = "Bitte mindestens 3 Zeichen eingeben.";
+            } else {
+                box.className = "alert alert-info py-2 px-3";
+                box.textContent = `Noch nicht unterstützt: „${q}“. (Demo durchsucht nur Infoseiten.)`;
+            }
+        };
+
+        // ausblenden, wenn Feld wieder geleert wird
+        document.querySelector("input")?.addEventListener("input", function () {
+            const box = document.querySelector("#searchFeedback");
+            if (!box) return;
+            if (this.value.trim().length === 0) {
+                box.className = "alert alert-info py-2 px-3 d-none";
+                box.textContent = "";
+            }
+        });
     </script>
 </body>
 
