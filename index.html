@@ -184,17 +184,19 @@
                                             </a>
                                             <!-- Auswahlbox -->
                                             <select id="type" class="form-select">
-                                                <option value="neutral">Neutrale Form (empfohlen)</option>
+                                                <option value="neutral">Neutrale Form</option>
                                                 <option value="doppelpunkt">Gender-Doppelpunkt</option>
                                                 <option value="stern">Genderstern</option>
                                             </select>
                                         </div>
                                     </div>
                                     <!-- Textfeld (kopierbar) -->
-                                    <textarea id="dst" class="form-control mono mt-2" rows="10" aria-label="Ausgabe (kopierbar)"></textarea>
+                                    <textarea id="dst" class="form-control mono mt-2" rows="10"
+                                        aria-label="Ausgabe (kopierbar)"></textarea>
                                     <div class="d-flex align-items-center gap-2 mt-2">
                                         <button id="copyBtn" class="btn btn-primary">Text kopieren</button>
-                                        <button id="explainBtn" class="btn btn-outline-secondary">Begründung anzeigen</button>
+                                        <button id="explainBtn" class="btn btn-outline-secondary">Begründung
+                                            anzeigen</button>
                                     </div>
 
                                     <!-- Erklaerung / Change log -->
@@ -371,77 +373,71 @@
             ];
 
             const rulesDoppelpunkt = [
-                [/Der Administrator\b/g, ''],
-                [/meldet sich der Benutzer\b/g, ''],
-                [/Der Entwickler prüft\b/g, ''],
-                [/Jeder Redaktur aktualisiert\b/g, ''],
-                [/der Leser\b/g, ''],
-                [/Der Autor\b/g, ''],
-                [/Der Prüfer testet\b/g, ''],
-                [/veröffentlicht der Betreiber\b/g, ''],
-                [/Der Support\b/g, ''],
-                [/seine\b/g, ''],
-                [/seinem Vorgesetzten\b/g, '']
-                [/seinem\b/g, ''],
-                [/seinen\b/g, ''],
-                [/seiner\b/g, ''],
-                [/seines\b/g, ''],
-                [/den Kunden\b/g, ''],
-                [/Der Mitarbeiter\b/g, ''],
-                [/startet der Benutzer\b/g, ''],
-                [/trägt der Anwender\b/g, ''],
-                [/sein\b/g, ''],
-                [/Jeder Kollege\b/g, ''],
-                [/der Techniker\b/g, ''],
-                [/sein Zweitgerät\b/g, ''],
-                [/der Nutzer\b/g, ''],
-                [/Der Teamleiter\b/g, ''],
-                [/der Benutzer\b/g, ''],
-                [/Der Support-Mitarbeiter\b/g, ''],
-                [/Der Bearbeiter ergänzt\b/g, ''],
-                [/dem Entwickler\b/g, ''],
-                [/Der Analyst bewertet\b/g, ''],
-                [/Der Projektleiter fasst\b/g, ''],
-                [/Der Auditor\b/g, ''],
-                [/der Mitarbeiter\b/g, ''],
-                [/erstellt der Verantwortliche\b/g, '']
+                [/Der Administrator\b/g, 'Die Administrator:in'],
+                [/der Benutzer\b/g, 'die Benutzer:in'],
+                [/Der Entwickler\b/g, 'Die Entwickler:in'],
+                [/Jeder Redakteur\b/g, 'Jede:r Redakteur:in'],
+                [/der Leser\b/g, 'die Leser:in'],
+                [/Der Autor\b/g, 'Die Autor:in'],
+                [/Der Prüfer\b/g, 'Die Prüfer:in'],
+                [/der Betreiber\b/g, 'die Betreiber:in'],
+                [/Der Support\b/g, 'Der Support (Team/Support:in)'],
+                [/seine\b/g, 'ihre'],
+                [/seinem Vorgesetzten\b/g, 'der eigenen Führungskraft'],
+                [/seinem\b/g, 'ihrem'],
+                [/seinen\b/g, 'ihren'],
+                [/seiner\b/g, 'ihrer'],
+                [/seines\b/g, 'ihres'],
+                [/den Kunden\b/g, 'die Kund:in'],
+                [/Der Mitarbeiter\b/g, 'Die Mitarbeiter:in'],
+                [/der Anwender\b/g, 'die Anwender:in'],
+                [/sein\b/g, 'ihr'],
+                [/Jeder Kollege\b/g, 'Jede:r Kolleg:in'],
+                [/der Techniker\b/g, 'die Techniker:in'],
+                [/sein\b/g, 'ihr'],
+                [/der Nutzer\b/g, 'die Nutzer:in'],
+                [/Der Teamleiter\b/g, 'Die Teamleiter:in'],
+                [/Der Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter:in'],
+                [/Der Bearbeiter\b/g, 'Die Bearbeiter:in'],
+                [/Der Analyst\b/g, 'Die Analyst:in'],
+                [/Der Projektleiter\b/g, 'Die Projektleiter:in'],
+                [/Der Auditor\b/g, 'Die Auditor:in'],
+                [/der Mitarbeiter\b/g, 'die Mitarbeiter:in'],
+                [/der Verantwortliche\b/g, 'die Verantwortliche Person']
             ];
 
             const rulesStern = [
-                [/Der Administrator\b/g, ''],
-                [/meldet sich der Benutzer\b/g, ''],
-                [/Der Entwickler prüft\b/g, ''],
-                [/Jeder Redaktur aktualisiert\b/g, ''],
-                [/der Leser\b/g, ''],
-                [/Der Autor\b/g, ''],
-                [/Der Prüfer testet\b/g, ''],
-                [/veröffentlicht der Betreiber\b/g, ''],
-                [/Der Support\b/g, ''],
-                [/seine\b/g, ''],
-                [/seinem Vorgesetzten\b/g, '']
-                [/seinem\b/g, ''],
-                [/seinen\b/g, ''],
-                [/seiner\b/g, ''],
-                [/seines\b/g, ''],
-                [/den Kunden\b/g, ''],
-                [/Der Mitarbeiter\b/g, ''],
-                [/startet der Benutzer\b/g, ''],
-                [/trägt der Anwender\b/g, ''],
-                [/sein\b/g, ''],
-                [/Jeder Kollege\b/g, ''],
-                [/der Techniker\b/g, ''],
-                [/sein Zweitgerät\b/g, ''],
-                [/der Nutzer\b/g, ''],
-                [/Der Teamleiter\b/g, ''],
-                [/der Benutzer\b/g, ''],
-                [/Der Support-Mitarbeiter\b/g, ''],
-                [/Der Bearbeiter ergänzt\b/g, ''],
-                [/dem Entwickler\b/g, ''],
-                [/Der Analyst bewertet\b/g, ''],
-                [/Der Projektleiter fasst\b/g, ''],
-                [/Der Auditor\b/g, ''],
-                [/der Mitarbeiter\b/g, ''],
-                [/erstellt der Verantwortliche\b/g, '']
+                [/Der Administrator\b/g, 'Die Administrator*in'],
+                [/der Benutzer\b/g, 'die Benutzer*in'],
+                [/Der Entwickler\b/g, 'Die Entwickler*in'],
+                [/Jeder Redakteur\b/g, 'Jede:r Redakteur*in'],
+                [/der Leser\b/g, 'die Leser*in'],
+                [/Der Autor\b/g, 'Die Autor*in'],
+                [/Der Prüfer\b/g, 'Die Prüfer*in'],
+                [/der Betreiber\b/g, 'die Betreiber*in'],
+                [/Der Support\b/g, 'Der Support (Team/Support*in)'],
+                [/seine\b/g, 'ihre'],
+                [/seinem Vorgesetzten\b/g, 'der eigenen Führungskraft'],
+                [/seinem\b/g, 'ihrem'],
+                [/seinen\b/g, 'ihren'],
+                [/seiner\b/g, 'ihrer'],
+                [/seines\b/g, 'ihres'],
+                [/den Kunden\b/g, 'die Kund*in'],
+                [/Der Mitarbeiter\b/g, 'Die Mitarbeiter*in'],
+                [/der Anwender\b/g, 'die Anwender*in'],
+                [/sein\b/g, 'ihr'],
+                [/Jeder Kollege\b/g, 'Jede:r Kolleg*in'],
+                [/der Techniker\b/g, 'die Techniker*in'],
+                [/sein\b/g, 'ihr'],
+                [/der Nutzer\b/g, 'die Nutzer*in'],
+                [/Der Teamleiter\b/g, 'Die Teamleiter*in'],
+                [/Der Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter*in'],
+                [/Der Bearbeiter\b/g, 'Die Bearbeiter*in'],
+                [/Der Analyst\b/g, 'Die Analyst*in'],
+                [/Der Projektleiter\b/g, 'Die Projektleiter*in'],
+                [/Der Auditor\b/g, 'Die Auditor*in'],
+                [/der Mitarbeiter\b/g, 'die Mitarbeiter*in'],
+                [/der Verantwortliche\b/g, 'die Verantwortliche Person']
             ];
 
             const applyRules = (rules) => {
