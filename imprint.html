@@ -62,8 +62,8 @@
             content: none !important;
         }
 
-        /* Hilfetext ausblenden, sobald Nutzer:in tippt (Placeholder verschwindet) */
-        #siteSearch input:not(:placeholder-shown)+.form-text {
+        /* Hilfetext ausblenden, sobald User tippt (Placeholder verschwindet) */
+        #searchbar input:not(:placeholder-shown)+.form-text {
             display: none;
         }
     </style>
@@ -78,9 +78,10 @@
     <header class="border-bottom bg-body-tertiary py-3">
         <div class="container">
             <div class="d-flex align-items-center justify-content-between gap-3">
-                <!-- Brand left -->
+                <!-- Logo links -->
                 <div class="brand d-flex align-items-center gap-2">
-                    <a href="#">
+                    <a class="brand-link d-inline-flex align-items-center gap-2" href="index.html"
+                        aria-label="Startseite – Genderly">
                         <span aria-hidden="true">
                             <!-- Icon -->
                             <svg viewBox="0 0 64 64" role="img" aria-label="Genderly Logo – Icon"
@@ -103,10 +104,9 @@
                     <!-- Links (unten) -->
                     <nav aria-label="Sekundäre Navigation">
                         <ul class="nav small">
-                            <li class="nav-item"><a class="nav-link p-1" href="index.html">Startseite</a></li>
                             <li class="nav-item"><a class="nav-link p-1" href="help.html">Hilfestellung</a></li>
                             <li class="nav-item"><a class="nav-link p-1" href="contact.html">Kontakt</a></li>
-                            <!-- RTL demo toggle -->
+                            <!-- demo flip -->
                             <li class="nav-item ms-2">
                                 <button id="toggleDir" class="btn btn-sm btn-outline-primary">RTL spiegeln</button>
                             </li>
@@ -114,21 +114,16 @@
                     </nav>
                 </div>
             </div>
-
-            <!-- search feedback -->
-            <div id="searchFeedback" class="alert alert-info py-2 px-3 mt-3 d-none" role="status" aria-live="polite">
-            </div>
         </div>
     </header>
 
     <section class="border-bottom bg-body py-5">
         <div class="container d-flex flex-column align-items-center text-center gap-4">
             <!-- mittige Suchleiste -->
-            <form id="siteSearch" class="search-wrap w-100" role="search" aria-label="Suche in Hilfe &amp; Regeln">
+            <form id="searchbar" class="search-wrap w-100" role="search" aria-label="Suche in Hilfe &amp; Regeln">
                 <label for="q" class="visually-hidden">Suche</label>
                 <input id="q" name="q" class="form-control form-control-lg rounded-pill shadow-sm search-input"
                     type="search" placeholder="Regel, Begriff oder Thema suchen…" />
-                <div class="form-text">Durchsucht nur die Infoseiten, nicht den Beispieltext.</div>
             </form>
 
             <!-- Such-Feedback (wandert mit nach unten) -->
