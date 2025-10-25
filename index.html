@@ -213,19 +213,6 @@
                             </div>
                         </div>
                     </section>
-
-                    <!-- Regeln -->
-                    <section id="regeln" class="mb-4">
-                        <h2 class="h5">Begründung &amp; Regeln</h2>
-                        <ol class="mb-2">
-                            <li><strong>Priorität:</strong> Neutrale Formen &gt; Doppelpunkt &gt; Stern.</li>
-                            <li><strong>Ausnahmen:</strong> Eigennamen/Zitate unverändert; juristische Passagen mit
-                                Hinweis.</li>
-                            <li><strong>Ambiguität:</strong> „Leiter“ → „Leitung“ (Rolle/Institution).</li>
-                        </ol>
-                        <p class="small text-body-secondary mb-0">Hinweis: Demo-Logik, keine vollständige Linguistik.
-                        </p>
-                    </section>
                 </section>
             </div>
         </div>
@@ -354,7 +341,7 @@
                 [/Der Autor\b/g, 'Die Autorenschaft'],
                 [/Der Prüfer testet\b/g, 'Die Prüfenden testen'],
                 [/veröffentlicht der Betreiber\b/g, 'veröffentlichen der Betreibende'],
-                [/Der Support\b/g, 'Die Supportabteilung'],
+                [/Der Support\b/g, 'Das Supportteam'],
                 [/seine\b/g, 'die'],
                 [/seinem Vorgesetzten\b/g, 'der*die Vorgesetzte'],
                 [/seinem\b/g, 'dem eigenen'],
@@ -379,7 +366,9 @@
                 [/Der Projektleiter fasst\b/g, 'Die Projektleitenden fassen'],
                 [/Der Auditor\b/g, 'Die Auditorenschaft'],
                 [/der Mitarbeiter\b/g, 'die Mitarbeiterschaft'],
-                [/erstellt der Verantwortliche\b/g, 'erstellen die Verantwortlichen']
+                [/erstellt der Verantwortliche\b/g, 'erstellen die Verantwortlichen'],
+                [/er\b/g, 'diese Person'],
+                [/Wer\b/g, 'Personen, die']
             ];
 
             const rulesDoppelpunkt = [
@@ -391,7 +380,7 @@
                 [/Der Autor\b/g, 'Die Autor:in'],
                 [/Der Prüfer\b/g, 'Die Prüfer:in'],
                 [/der Betreiber\b/g, 'die Betreiber:in'],
-                [/Der Support\b/g, 'Der Support (Team/Support:in)'],
+                [/Der Support\b/g, 'Das Supportteam'],
                 [/seine\b/g, 'ihre'],
                 [/seinem Vorgesetzten\b/g, 'der eigenen Führungskraft'],
                 [/seinem\b/g, 'ihrem'],
@@ -404,7 +393,6 @@
                 [/sein\b/g, 'ihr'],
                 [/Jeder Kollege\b/g, 'Jede:r Kolleg:in'],
                 [/der Techniker\b/g, 'die Techniker:in'],
-                [/sein\b/g, 'ihr'],
                 [/der Nutzer\b/g, 'die Nutzer:in'],
                 [/Der Teamleiter\b/g, 'Die Teamleiter:in'],
                 [/Der Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter:in'],
@@ -413,19 +401,21 @@
                 [/Der Projektleiter\b/g, 'Die Projektleiter:in'],
                 [/Der Auditor\b/g, 'Die Auditor:in'],
                 [/der Mitarbeiter\b/g, 'die Mitarbeiter:in'],
-                [/der Verantwortliche\b/g, 'die Verantwortliche Person']
+                [/der Verantwortliche\b/g, 'die Verantwortliche Person'],
+                [/er\b/g, 'diese Person'],
+                [/Wer\b/g, 'Personen, die']
             ];
 
             const rulesStern = [
                 [/Der Administrator\b/g, 'Die Administrator*in'],
                 [/der Benutzer\b/g, 'die Benutzer*in'],
                 [/Der Entwickler\b/g, 'Die Entwickler*in'],
-                [/Jeder Redakteur\b/g, 'Jede:r Redakteur*in'],
+                [/Jeder Redakteur\b/g, 'Jede* Redakteur*in'],
                 [/der Leser\b/g, 'die Leser*in'],
                 [/Der Autor\b/g, 'Die Autor*in'],
                 [/Der Prüfer\b/g, 'Die Prüfer*in'],
                 [/der Betreiber\b/g, 'die Betreiber*in'],
-                [/Der Support\b/g, 'Der Support (Team/Support*in)'],
+                [/Der Support\b/g, 'Das Supportteam'],
                 [/seine\b/g, 'ihre'],
                 [/seinem Vorgesetzten\b/g, 'der eigenen Führungskraft'],
                 [/seinem\b/g, 'ihrem'],
@@ -436,9 +426,8 @@
                 [/Der Mitarbeiter\b/g, 'Die Mitarbeiter*in'],
                 [/der Anwender\b/g, 'die Anwender*in'],
                 [/sein\b/g, 'ihr'],
-                [/Jeder Kollege\b/g, 'Jede:r Kolleg*in'],
+                [/Jeder Kollege\b/g, 'Jede* Kolleg*in'],
                 [/der Techniker\b/g, 'die Techniker*in'],
-                [/sein\b/g, 'ihr'],
                 [/der Nutzer\b/g, 'die Nutzer*in'],
                 [/Der Teamleiter\b/g, 'Die Teamleiter*in'],
                 [/Der Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter*in'],
@@ -447,7 +436,9 @@
                 [/Der Projektleiter\b/g, 'Die Projektleiter*in'],
                 [/Der Auditor\b/g, 'Die Auditor*in'],
                 [/der Mitarbeiter\b/g, 'die Mitarbeiter*in'],
-                [/der Verantwortliche\b/g, 'die Verantwortliche Person']
+                [/der Verantwortliche\b/g, 'die Verantwortliche Person'],
+                [/er\b/g, 'diese Person'],
+                [/Wer\b/g, 'Personen, die']
             ];
 
             const applyRules = (rules) => {

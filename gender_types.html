@@ -70,6 +70,16 @@
         .text-violet {
             color: var(--violet);
         }
+
+        /* Einrückug Zitat Fußnote */
+        .hanging-indent {
+            margin-left: 0;
+            padding-left: 3.5rem;
+            /* Einrückung anpassen, z. B. 2rem oder 3rem */
+            text-indent: -3.5rem;
+            /* Negativ indentiert erste Zeile */
+            display: block;
+        }
     </style>
 </head>
 
@@ -246,14 +256,16 @@
                     </article>
 
                     <footer class="border-top pt-3 mt-4">
-                        <p class="small text-body-secondary mb-0">
-                            Informationen und Beispiele von: <a
-                                href="https://gb.uni-koeln.de/e2106/e2113/e16894/20210709_Leitfaden_GGSprache_UzK_Webversion_ger.pdf"
+                        <p class="small text-body-secondary mb-0 hanging-indent">
+                            Gäckle, A., Büschgas A. (2021). <i>Leitfaden Gendergerechte Sprache.</i><br>
+                            Universität zu Köln.<br>
+                            <a href="https://gb.uni-koeln.de/e2106/e2113/e16894/20210709_Leitfaden_GGSprache_UzK_Webversion_ger.pdf"
                                 target="_blank" rel="noopener">
-                                Leitfaden für geschlechtergerechte Sprache, Universität zu Köln
+                                https://gb.uni-koeln.de/e2106/e2113/e16894/20210709_Leitfaden_GGSprache_UzK_Webversion_ger.pdf
                             </a>
                         </p>
                     </footer>
+
                 </section>
 
     </main>
