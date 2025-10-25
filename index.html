@@ -141,7 +141,7 @@
                 <aside class="col-lg-3 col-12">
                     <nav class="local-nav sticky-top-24" aria-label="Lokale Navigation">
                         <ul class="nav nav-pills flex-column">
-                            <li class="nav-item active"><a class="nav-link" href="#translator">Übersetzer</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="index.html">Übersetzer</a></li>
                             <li class="nav-item"><a class="nav-link" href="examples.html">Beispieltexte</a></li>
                             <li class="nav-item"><a class="nav-link" href="rules.html">Begründung &amp; Regeln</a></li>
                             <li class="nav-item"><a class="nav-link" href="gender_types.html">Gender-Formen
@@ -333,112 +333,129 @@
 
             // Replacements
             const rulesNeutral = [
-                [/Der Administrator\b/g, 'Das Admin-Team'],
-                [/meldet sich der Benutzer\b/g, 'melden sich die Benutzenden'],
-                [/Der Entwickler prüft\b/g, 'Die Entwicklenden prüfen'],
-                [/Jeder Redaktur aktualisiert\b/g, 'Alle Redaktionsmitglieder aktualisieren'],
-                [/der Leser\b/g, 'die Leserschaft'],
-                [/Der Autor\b/g, 'Die Autorenschaft'],
-                [/Der Prüfer testet\b/g, 'Die Prüfenden testen'],
-                [/veröffentlicht der Betreiber\b/g, 'veröffentlichen der Betreibende'],
-                [/Der Support\b/g, 'Das Supportteam'],
-                [/seine\b/g, 'die'],
-                [/seinem Vorgesetzten\b/g, 'der*die Vorgesetzte'],
-                [/seinem\b/g, 'dem eigenen'],
-                [/seinen\b/g, 'den eigenen'],
-                [/seiner\b/g, 'der eigenen'],
-                [/seines\b/g, 'des eigenen'],
-                [/den Kunden\b/g, 'die Kundschaft'],
-                [/Der Mitarbeiter öffnet\b/g, 'Die Mitarbeitenden öffnen'],
-                [/startet der Benutzer\b/g, 'starten die Benutzenden'],
-                [/trägt der Anwender\b/g, 'tragen die Anwendenden'],
-                [/sein\b/g, 'ihr'],
-                [/Jeder Kollege\b/g, 'Die Kollegschaft'],
-                [/der Techniker\b/g, 'das Technik-Team'],
-                [/sein Zweitgerät\b/g, 'das eigene Zweitgerät'],
-                [/der Nutzer\b/g, 'der Nutzende'],
-                [/Der Teamleiter\b/g, 'Der*die Teamleitende'],
-                [/der Benutzer\b/g, 'die Benutzenden'],
-                [/Der Support-Mitarbeiter\b/g, 'Die Support-Mitarbeitenden'],
-                [/Der Bearbeiter ergänzt\b/g, 'Die Bearbeitenden ergänzen'],
-                [/dem Entwickler\b/g, 'den Entwickelnden'],
-                [/Der Analyst bewertet\b/g, 'die Analysten bewerten'],
-                [/Der Projektleiter fasst\b/g, 'Die Projektleitenden fassen'],
-                [/Der Auditor\b/g, 'Die Auditorenschaft'],
-                [/der Mitarbeiter\b/g, 'die Mitarbeiterschaft'],
-                [/erstellt der Verantwortliche\b/g, 'erstellen die Verantwortlichen'],
-                [/er\b/g, 'diese Person'],
-                [/Wer\b/g, 'Personen, die']
+                // --- Berufs- & Rollenbezeichnungen ---
+                [/\bDer Administrator\b/g, 'Die Administration'],
+                [/\bder Benutzer\b/g, 'die Person, die das System nutzt'],
+                [/\bDer Entwickler\b/g, 'Die Entwicklungsperson'],
+                [/\bJeder Redakteur\b/g, 'Alle Personen aus der Redaktion'],
+                [/\bder Leser\b/g, 'die Leserschaft'],
+                [/\bDer Autor\b/g, 'Die verfassende Person'],
+                [/\bDer Prüfer\b/g, 'Die prüfende Person'],
+                [/\bder Betreiber\b/g, 'die betreibende Instanz'],
+                [/\bDer Support\b/g, 'Das Support-Team'],
+                [/\bDer Mitarbeiter\b/g, 'Die Mitarbeitende Person'],
+                [/\bder Anwender\b/g, 'die anwendende Person'],
+                [/\bJeder Kollege\b/g, 'Alle Teammitglieder'],
+                [/\bder Techniker\b/g, 'die Fachkraft für Technik'],
+                [/\bder Nutzer\b/g, 'die nutzende Person'],
+                [/\bDer Teamleiter\b/g, 'Die Teamleitung'],
+                [/\bDer Support-Mitarbeiter\b/g, 'Die Person aus dem Support'],
+                [/\bDer Bearbeiter\b/g, 'Die bearbeitende Person'],
+                [/\bDer Analyst\b/g, 'Die analysierende Person'],
+                [/\bDer Projektleiter\b/g, 'Die Projektleitung'],
+                [/\bDer Auditor\b/g, 'Die prüfende Instanz'],
+                [/\bder Mitarbeiter\b/g, 'die Mitarbeitende Person'],
+                [/\bder Verantwortliche\b/g, 'die verantwortliche Person'],
+
+                // --- Subjekt-/Satzstrukturen ---
+                [/\bWer\b/g, 'Personen, die'],
+                [/\bden Kunden\b/g, 'die Kundschaft'],
+
+                // --- Possessivpronomen ---
+                [/\bseinem Vorgesetzten\b/g, 'der eigenen Leitungsperson'],
+                [/\bseines\b/g, 'deren'],
+                [/\bseinen\b/g, 'deren'],
+                [/\bseinem\b/g, 'deren'],
+                [/\bseiner\b/g, 'deren'],
+                [/\bseine\b/g, 'deren'],
+                [/\bsein\b/g, 'deren'],
+
+                // --- Personalpronomen "er" ---
+                [/\b[Ee]r\b/g, 'diese Person']
             ];
 
             const rulesDoppelpunkt = [
-                [/Der Administrator\b/g, 'Die Administrator:in'],
-                [/der Benutzer\b/g, 'die Benutzer:in'],
-                [/Der Entwickler\b/g, 'Die Entwickler:in'],
-                [/Jeder Redakteur\b/g, 'Jede:r Redakteur:in'],
-                [/der Leser\b/g, 'die Leser:in'],
-                [/Der Autor\b/g, 'Die Autor:in'],
-                [/Der Prüfer\b/g, 'Die Prüfer:in'],
-                [/der Betreiber\b/g, 'die Betreiber:in'],
-                [/Der Support\b/g, 'Das Supportteam'],
-                [/seine\b/g, 'ihre'],
-                [/seinem Vorgesetzten\b/g, 'der eigenen Führungskraft'],
-                [/seinem\b/g, 'ihrem'],
-                [/seinen\b/g, 'ihren'],
-                [/seiner\b/g, 'ihrer'],
-                [/seines\b/g, 'ihres'],
-                [/den Kunden\b/g, 'die Kund:in'],
-                [/Der Mitarbeiter\b/g, 'Die Mitarbeiter:in'],
-                [/der Anwender\b/g, 'die Anwender:in'],
-                [/sein\b/g, 'ihr'],
-                [/Jeder Kollege\b/g, 'Jede:r Kolleg:in'],
-                [/der Techniker\b/g, 'die Techniker:in'],
-                [/der Nutzer\b/g, 'die Nutzer:in'],
-                [/Der Teamleiter\b/g, 'Die Teamleiter:in'],
-                [/Der Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter:in'],
-                [/Der Bearbeiter\b/g, 'Die Bearbeiter:in'],
-                [/Der Analyst\b/g, 'Die Analyst:in'],
-                [/Der Projektleiter\b/g, 'Die Projektleiter:in'],
-                [/Der Auditor\b/g, 'Die Auditor:in'],
-                [/der Mitarbeiter\b/g, 'die Mitarbeiter:in'],
-                [/der Verantwortliche\b/g, 'die Verantwortliche Person'],
-                [/er\b/g, 'diese Person'],
-                [/Wer\b/g, 'Personen, die']
+                // --- Berufs- & Rollenbezeichnungen ---
+                [/\bDer Administrator\b/g, 'Die Administrator:in'],
+                [/\bder Benutzer\b/g, 'die Benutzer:in'],
+                [/\bDer Entwickler\b/g, 'Die Entwickler:in'],
+                [/\bJeder Redakteur\b/g, 'Jede*r Redakteur*in'],
+                [/\bder Leser\b/g, 'die Leser:in'],
+                [/\bDer Autor\b/g, 'Die Autor:in'],
+                [/\bDer Prüfer\b/g, 'Die Prüfer:in'],
+                [/\bder Betreiber\b/g, 'die Betreiber:in'],
+                [/\bDer Support\b/g, 'Das Support-Team'],
+                [/\bDer Mitarbeiter\b/g, 'Die Mitarbeiter:in'],
+                [/\bder Anwender\b/g, 'die Anwender:in'],
+                [/\bJeder Kollege\b/g, 'Jede:r Kolleg:in'],
+                [/\bder Techniker\b/g, 'die Techniker:in'],
+                [/\bder Nutzer\b/g, 'die Nutzer:in'],
+                [/\bDer Teamleiter\b/g, 'Die Teamleiter:in'],
+                [/\bDer Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter:in'],
+                [/\bDer Bearbeiter\b/g, 'Die Bearbeiter:in'],
+                [/\bDer Analyst\b/g, 'Die Analyst:in'],
+                [/\bDer Projektleiter\b/g, 'Die Projektleiter:in'],
+                [/\bDer Auditor\b/g, 'Die Auditor:in'],
+                [/\bder Mitarbeiter\b/g, 'die Mitarbeiter:in'],
+                [/\bder Verantwortliche\b/g, 'die verantwortliche Person'],
+
+                // --- Subjekt-/Satzstrukturen ---
+                [/\bWer\b/g, 'Personen, die'],
+                [/\bden Kunden\b/g, 'die Kundschaft'], // alternativ: 'die Kund:in'
+
+                // --- Possessivpronomen ---
+                [/\bseinem Vorgesetzten\b/g, 'der eigenen Führungskraft'],
+                [/\bseines\b/g, 'ihres'],
+                [/\bseinen\b/g, 'ihren'],
+                [/\bseinem\b/g, 'ihrem'],
+                [/\bseiner\b/g, 'ihrer'],
+                [/\bseine\b/g, 'ihre'],
+                [/\bsein\b/g, 'ihr'],
+
+                // --- Personalpronomen "er" ---
+                [/\b[Ee]r\b/g, 'diese Person']
             ];
 
             const rulesStern = [
-                [/Der Administrator\b/g, 'Die Administrator*in'],
-                [/der Benutzer\b/g, 'die Benutzer*in'],
-                [/Der Entwickler\b/g, 'Die Entwickler*in'],
-                [/Jeder Redakteur\b/g, 'Jede* Redakteur*in'],
-                [/der Leser\b/g, 'die Leser*in'],
-                [/Der Autor\b/g, 'Die Autor*in'],
-                [/Der Prüfer\b/g, 'Die Prüfer*in'],
-                [/der Betreiber\b/g, 'die Betreiber*in'],
-                [/Der Support\b/g, 'Das Supportteam'],
-                [/seine\b/g, 'ihre'],
-                [/seinem Vorgesetzten\b/g, 'der eigenen Führungskraft'],
-                [/seinem\b/g, 'ihrem'],
-                [/seinen\b/g, 'ihren'],
-                [/seiner\b/g, 'ihrer'],
-                [/seines\b/g, 'ihres'],
-                [/den Kunden\b/g, 'die Kund*in'],
-                [/Der Mitarbeiter\b/g, 'Die Mitarbeiter*in'],
-                [/der Anwender\b/g, 'die Anwender*in'],
-                [/sein\b/g, 'ihr'],
-                [/Jeder Kollege\b/g, 'Jede* Kolleg*in'],
-                [/der Techniker\b/g, 'die Techniker*in'],
-                [/der Nutzer\b/g, 'die Nutzer*in'],
-                [/Der Teamleiter\b/g, 'Die Teamleiter*in'],
-                [/Der Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter*in'],
-                [/Der Bearbeiter\b/g, 'Die Bearbeiter*in'],
-                [/Der Analyst\b/g, 'Die Analyst*in'],
-                [/Der Projektleiter\b/g, 'Die Projektleiter*in'],
-                [/Der Auditor\b/g, 'Die Auditor*in'],
-                [/der Mitarbeiter\b/g, 'die Mitarbeiter*in'],
-                [/der Verantwortliche\b/g, 'die Verantwortliche Person'],
-                [/er\b/g, 'diese Person'],
-                [/Wer\b/g, 'Personen, die']
+                // --- Berufs- & Rollenbezeichnungen ---
+                [/\bDer Administrator\b/g, 'Die Administrator*in'],
+                [/\bder Benutzer\b/g, 'die Benutzer*in'],
+                [/\bDer Entwickler\b/g, 'Die Entwickler*in'],
+                [/\bJeder Redakteur\b/g, 'Jede*r Redakteur*in'],
+                [/\bder Leser\b/g, 'die Leser*in'],
+                [/\bDer Autor\b/g, 'Die Autor*in'],
+                [/\bDer Prüfer\b/g, 'Die Prüfer*in'],
+                [/\bder Betreiber\b/g, 'die Betreiber*in'],
+                [/\bDer Support\b/g, 'Das Support-Team'],
+                [/\bDer Mitarbeiter\b/g, 'Die Mitarbeiter*in'],
+                [/\bder Anwender\b/g, 'die Anwender*in'],
+                [/\bJeder Kollege\b/g, 'Jede*r Kolleg*in'],
+                [/\bder Techniker\b/g, 'die Techniker*in'],
+                [/\bder Nutzer\b/g, 'die Nutzer*in'],
+                [/\bDer Teamleiter\b/g, 'Die Teamleiter*in'],
+                [/\bDer Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter*in'],
+                [/\bDer Bearbeiter\b/g, 'Die Bearbeiter*in'],
+                [/\bDer Analyst\b/g, 'Die Analyst*in'],
+                [/\bDer Projektleiter\b/g, 'Die Projektleiter*in'],
+                [/\bDer Auditor\b/g, 'Die Auditor*in'],
+                [/\bder Mitarbeiter\b/g, 'die Mitarbeiter*in'],
+                [/\bder Verantwortliche\b/g, 'die verantwortliche Person'],
+
+                // --- Subjekt-/Satzstrukturen ---
+                [/\bWer\b/g, 'Personen, die'],
+                [/\bden Kunden\b/g, 'die Kundschaft'], // alternativ: 'die Kund*in'
+
+                // --- Possessivpronomen ---
+                [/\bseinem Vorgesetzten\b/g, 'der eigenen Führungskraft'],
+                [/\bseines\b/g, 'ihres'],
+                [/\bseinen\b/g, 'ihren'],
+                [/\bseinem\b/g, 'ihrem'],
+                [/\bseiner\b/g, 'ihrer'],
+                [/\bseine\b/g, 'ihre'],
+                [/\bsein\b/g, 'ihr'],
+
+                // --- Personalpronomen "er" ---
+                [/\b[Ee]r\b/g, 'diese Person']
             ];
 
             const applyRules = (rules) => {

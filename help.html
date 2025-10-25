@@ -66,6 +66,10 @@
         #searchbar input:not(:placeholder-shown)+.form-text {
             display: none;
         }
+
+        .text-violet {
+            color: var(--violet) !important;
+        }
     </style>
 </head>
 
@@ -137,7 +141,7 @@
         <div class="container">
             <!-- RTL flip -->
             <div id="contentRow" class="row g-4">
-                <!-- flipt bei LTR nach rechts, bei RTL nach links -->
+                <!-- Sidebar -->
                 <aside class="col-lg-3 col-12">
                     <nav class="local-nav sticky-top-24" aria-label="Lokale Navigation">
                         <ul class="nav nav-pills flex-column">
@@ -149,76 +153,157 @@
                         </ul>
                     </nav>
                 </aside>
-    </main>
 
-    <!-- Footer -->
-    <footer class="border-top bg-body-tertiary py-4 mt-4">
-        <div class="container">
-            <p class="mb-2 small">Uni-Abgabe. Nicht produktiv. Inhalte ohne Gewähr. Marken/Urheberrechte Dritter bleiben
-                unberührt.
-            </p>
-            <nav aria-label="Recht & Info">
-                <ul class="nav">
-                    <li class="nav-item"><a class="nav-link px-2" href="term_of_use.html">Nutzungsbedingungen</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link px-2" href="privacy.html">Datenschutz</a></li>
-                    <li class="nav-item"><a class="nav-link px-2" href="imprint.html">Impressum</a></li>
-                </ul>
-            </nav>
-            <p class="small text-body-secondary mb-0">© 2025 Genderly (Studierendenprojekt).</p>
-        </div>
-    </footer>
+                <!-- Hauptinhalt (rechte Spalte!) -->
+                <section class="col-12 col-lg-9">
+                    <article id="translator-howto" class="mb-5">
+                        <h1 class="h4 text-grey mb-3">So funktioniert der Übersetzer</h1>
+                        <p class="text-body-secondary mb-4">
+                            Links wählst du einen Beispieltext aus, rechts legst du die gewünschte Gender-Variante fest.
+                            Unter <strong>„Begründung“</strong> siehst du alle Änderungen im Klartext. Mit
+                            <strong>„Text kopieren“</strong> landet die Ausgabe in deiner Zwischenablage.
+                        </p>
 
-    <!-- JavaScript-->
-    <!-- toggle -->
-    <script type="text/javascript">
-        // --- flips the content row visually when dir="rtl"
-        const contentRow = document.getElementById('contentRow');
-        function applyDirLayout() {
-            if (document.documentElement.dir === 'rtl') {
-                contentRow.classList.add('flex-row-reverse');
-            } else {
-                contentRow.classList.remove('flex-row-reverse');
-            }
-        }
-        // --- toggle button
-        document.getElementById('toggleDir').addEventListener('click', () => {
-            const html = document.documentElement;
-            html.dir = (html.dir === 'rtl') ? 'ltr' : 'rtl';
-            applyDirLayout();
-            document.getElementById('toggleDir').textContent = (html.dir === 'rtl') ? 'LTR spiegeln' : 'RTL spiegeln';
-        });
-        applyDirLayout();
+                        <div class="row g-4">
+                            <!-- Schritte -->
+                            <div class="col-12 col-lg-6">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h2 class="h6 text-violet mb-3">Schritt für Schritt</h2>
+                                        <ol class="list-group list-group-numbered">
+                                            <li class="list-group-item">
+                                                <strong>Beispiel wählen (links):</strong>
+                                                Wähle einen Text aus der Dropdown-Liste. Der Originaltext erscheint im
+                                                linken Textfeld.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Variante wählen (rechts):</strong>
+                                                Entscheide dich für <em>Neutrale Form</em>, <em>Gender-Doppelpunkt</em>
+                                                oder <em>Genderstern</em>.
+                                                Die Übersetzung erscheint sofort im rechten Textfeld.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Begründung anzeigen:</strong>
+                                                Klick auf <em>„Begründung anzeigen“</em>, um eine Liste aller ersetzten
+                                                Begriffe/Strukturen zu sehen.
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Text kopieren:</strong>
+                                                Mit <em>„Text kopieren“</em> landet der übersetzte Text in deiner
+                                                Zwischenablage. Einfach einfügen.
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
 
-        // --- search bar
-        document.querySelector("#searchbar").onsubmit = function (e) {
-            e.preventDefault();
+                            <!-- Elemente & Hinweise -->
+                            <div class="col-12 col-lg-6">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h2 class="h6 text-violet mb-3">Elemente im Überblick</h2>
+                                        <dl class="row mb-0">
+                                            <dt class="col-5">Beispiel wählen</dt>
+                                            <dd class="col-7">Öffnet einen vorgegebenen Mustertext (readonly links).
+                                            </dd>
 
-            const q = (document.querySelector("input")?.value || "").trim();
-            const box = document.querySelector("#searchFeedback");
+                                            <dt class="col-5">Gender-Variante</dt>
+                                            <dd class="col-7">Wählt die Zielschreibweise (neutral, Doppelpunkt, Stern).
+                                            </dd>
 
-            if (!box) return;
+                                            <dt class="col-5">Ausgabe</dt>
+                                            <dd class="col-7">Rechtes Feld mit der direkt angewendeten Übersetzung.</dd>
 
-            // Mindestens 3 Zeichen als Suchwort
-            if (q.length < 3) {
-                box.className = "alert alert-warning py-2 px-3"; // Bootstrap-Styles
-                box.textContent = "Bitte mindestens 3 Zeichen eingeben.";
-            } else {
-                box.className = "alert alert-info py-2 px-3";
-                box.textContent = `Noch nicht unterstützt: „${q}“. (Demo durchsucht nur Infoseiten.)`;
-            }
-        };
+                                            <dt class="col-5">Begründung</dt>
+                                            <dd class="col-7">Änderungs-Log: zeigt, was ersetzt/umformuliert wurde.</dd>
 
-        // ausblenden, wenn Feld wieder geleert wird
-        document.querySelector("input")?.addEventListener("input", function () {
-            const box = document.querySelector("#searchFeedback");
-            if (!box) return;
-            if (this.value.trim().length === 0) {
-                box.className = "alert alert-info py-2 px-3 d-none";
-                box.textContent = "";
-            }
-        });
-    </script>
+                                            <dt class="col-5">Text kopieren</dt>
+                                            <dd class="col-7">Kopiert die Ausgabe in die Zwischenablage.</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Zusatzhinweis -->
+                        <div class="alert alert-info mt-4 mb-0" role="note">
+                            <strong>Tipp:</strong> Die Unterschiede der Varianten erklärst du auf
+                            <a href="gender_types.html">Gender-Formen</a>
+                        </div>
+
+                        <!-- Footer -->
+                        <footer class="border-top bg-body-tertiary py-4 mt-4">
+                            <div class="container">
+                                <p class="mb-2 small">Uni-Abgabe. Nicht produktiv. Inhalte ohne Gewähr.
+                                    Marken/Urheberrechte Dritter bleiben
+                                    unberührt.
+                                </p>
+                                <nav aria-label="Recht & Info">
+                                    <ul class="nav">
+                                        <li class="nav-item"><a class="nav-link px-2"
+                                                href="term_of_use.html">Nutzungsbedingungen</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link px-2"
+                                                href="privacy.html">Datenschutz</a></li>
+                                        <li class="nav-item"><a class="nav-link px-2" href="imprint.html">Impressum</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <p class="small text-body-secondary mb-0">© 2025 Genderly (Studierendenprojekt).
+                                </p>
+                            </div>
+                        </footer>
+
+                        <!-- JavaScript-->
+                        <!-- toggle -->
+                        <script type="text/javascript">
+                            // --- flips the content row visually when dir="rtl"
+                            const contentRow = document.getElementById('contentRow');
+                            function applyDirLayout() {
+                                if (document.documentElement.dir === 'rtl') {
+                                    contentRow.classList.add('flex-row-reverse');
+                                } else {
+                                    contentRow.classList.remove('flex-row-reverse');
+                                }
+                            }
+                            // --- toggle button
+                            document.getElementById('toggleDir').addEventListener('click', () => {
+                                const html = document.documentElement;
+                                html.dir = (html.dir === 'rtl') ? 'ltr' : 'rtl';
+                                applyDirLayout();
+                                document.getElementById('toggleDir').textContent = (html.dir === 'rtl') ? 'LTR spiegeln' : 'RTL spiegeln';
+                            });
+                            applyDirLayout();
+
+                            // --- search bar
+                            document.querySelector("#searchbar").onsubmit = function (e) {
+                                e.preventDefault();
+
+                                const q = (document.querySelector("input")?.value || "").trim();
+                                const box = document.querySelector("#searchFeedback");
+
+                                if (!box) return;
+
+                                // Mindestens 3 Zeichen als Suchwort
+                                if (q.length < 3) {
+                                    box.className = "alert alert-warning py-2 px-3"; // Bootstrap-Styles
+                                    box.textContent = "Bitte mindestens 3 Zeichen eingeben.";
+                                } else {
+                                    box.className = "alert alert-info py-2 px-3";
+                                    box.textContent = `Noch nicht unterstützt: „${q}“. (Demo durchsucht nur Infoseiten.)`;
+                                }
+                            };
+
+                            // ausblenden, wenn Feld wieder geleert wird
+                            document.querySelector("input")?.addEventListener("input", function () {
+                                const box = document.querySelector("#searchFeedback");
+                                if (!box) return;
+                                if (this.value.trim().length === 0) {
+                                    box.className = "alert alert-info py-2 px-3 d-none";
+                                    box.textContent = "";
+                                }
+                            });
+                        </script>
 </body>
 
 </html>
