@@ -155,16 +155,17 @@
                     <section id="demo" class="card border-0 shadow-sm mb-4">
                         <div class="card-body">
                             <div class="row g-3">
+
                                 <!-- Linker Kasten (readonly) -->
                                 <div class="col-md-6">
                                     <!-- Auswahlbox -->
                                     <label for="sample" class="form-label fw-semibold">Beispiel wählen</label>
                                     <select id="sample" class="form-select" aria-describedby="picksample">
                                         <option value="" selected disabled>Beispiel wählen</option>
-                                        <option value="1">Installation und Erstkonfiguration des CMS-Plugins
+                                        <option value="0">Installation und Erstkonfiguration des CMS-Plugins
                                             "Secureforms"</option>
-                                        <option value="2">VPN-Client einrichten (Windows)</option>
-                                        <option value="3">Tickets im Helpdesk bearbeiten</option>
+                                        <option value="1">VPN-Client einrichten (Windows)</option>
+                                        <option value="2">Tickets im Helpdesk bearbeiten</option>
                                     </select>
                                     <!-- Textfeld (readonly) -->
                                     <textarea id="src" class="form-control mono mt-2" rows="10" readonly></textarea>
@@ -191,6 +192,7 @@
                                             </select>
                                         </div>
                                     </div>
+                                    
                                     <!-- Textfeld (kopierbar) -->
                                     <textarea id="dst" class="form-control mono mt-2" rows="10"
                                         aria-label="Ausgabe (kopierbar)"></textarea>
@@ -239,7 +241,7 @@
     <!-- JavaScript-->
     <!-- toggle -->
     <script type="text/javascript">
-        // --- flips the content row visually when dir="rtl"
+        // --- text flip RTL/LTR ---
         const contentRow = document.getElementById('contentRow');
         function applyDirLayout() {
             if (document.documentElement.dir === 'rtl') {
@@ -342,6 +344,7 @@
                 [/\bDer Autor\b/g, 'Die verfassende Person'],
                 [/\bDer Prüfer\b/g, 'Die prüfende Person'],
                 [/\bder Betreiber\b/g, 'die betreibende Instanz'],
+                [/\bDer Support-Mitarbeiter\b/g, 'Die Person aus dem Support'],
                 [/\bDer Support\b/g, 'Das Support-Team'],
                 [/\bDer Mitarbeiter\b/g, 'Die Mitarbeitende Person'],
                 [/\bder Anwender\b/g, 'die anwendende Person'],
@@ -349,7 +352,6 @@
                 [/\bder Techniker\b/g, 'die Fachkraft für Technik'],
                 [/\bder Nutzer\b/g, 'die nutzende Person'],
                 [/\bDer Teamleiter\b/g, 'Die Teamleitung'],
-                [/\bDer Support-Mitarbeiter\b/g, 'Die Person aus dem Support'],
                 [/\bDer Bearbeiter\b/g, 'Die bearbeitende Person'],
                 [/\bDer Analyst\b/g, 'Die analysierende Person'],
                 [/\bDer Projektleiter\b/g, 'Die Projektleitung'],
@@ -384,6 +386,7 @@
                 [/\bDer Autor\b/g, 'Die Autor:in'],
                 [/\bDer Prüfer\b/g, 'Die Prüfer:in'],
                 [/\bder Betreiber\b/g, 'die Betreiber:in'],
+                [/\bDer Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter:in'],
                 [/\bDer Support\b/g, 'Das Support-Team'],
                 [/\bDer Mitarbeiter\b/g, 'Die Mitarbeiter:in'],
                 [/\bder Anwender\b/g, 'die Anwender:in'],
@@ -391,7 +394,6 @@
                 [/\bder Techniker\b/g, 'die Techniker:in'],
                 [/\bder Nutzer\b/g, 'die Nutzer:in'],
                 [/\bDer Teamleiter\b/g, 'Die Teamleiter:in'],
-                [/\bDer Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter:in'],
                 [/\bDer Bearbeiter\b/g, 'Die Bearbeiter:in'],
                 [/\bDer Analyst\b/g, 'Die Analyst:in'],
                 [/\bDer Projektleiter\b/g, 'Die Projektleiter:in'],
@@ -426,6 +428,7 @@
                 [/\bDer Autor\b/g, 'Die Autor*in'],
                 [/\bDer Prüfer\b/g, 'Die Prüfer*in'],
                 [/\bder Betreiber\b/g, 'die Betreiber*in'],
+                [/\bDer Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter*in'],
                 [/\bDer Support\b/g, 'Das Support-Team'],
                 [/\bDer Mitarbeiter\b/g, 'Die Mitarbeiter*in'],
                 [/\bder Anwender\b/g, 'die Anwender*in'],
@@ -433,7 +436,6 @@
                 [/\bder Techniker\b/g, 'die Techniker*in'],
                 [/\bder Nutzer\b/g, 'die Nutzer*in'],
                 [/\bDer Teamleiter\b/g, 'Die Teamleiter*in'],
-                [/\bDer Support-Mitarbeiter\b/g, 'Die Support-Mitarbeiter*in'],
                 [/\bDer Bearbeiter\b/g, 'Die Bearbeiter*in'],
                 [/\bDer Analyst\b/g, 'Die Analyst*in'],
                 [/\bDer Projektleiter\b/g, 'Die Projektleiter*in'],
@@ -458,11 +460,26 @@
                 [/\b[Ee]r\b/g, 'diese Person']
             ];
 
+            // --- apply rules - unique --> 
             const applyRules = (rules) => {
                 let result = text;
                 rules.forEach(([re, repl]) => {
-                    if (re.test(result)) {
-                        result = result.replace(re, (m) => { changes.push(`${m} → ${repl}`); return repl; });
+                    const before = result;
+
+                    // anzahl des matches zählen
+                    const rx = new RegExp(re.source, re.flags);
+                    const matches = before.match(rx);
+                    const count = matches ? matches.length : 0;
+
+                    if (count > 0) {
+                        // erstes match 
+                        const firstMatch = matches[0];
+
+                        // ersetzen
+                        result = before.replace(re, repl);
+
+                        // ein log pro match
+                        changes.push(`${firstMatch} → ${repl}${count > 1 ? ` (×${count})` : ''}`);
                     }
                 });
                 return result;
